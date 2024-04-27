@@ -1,3 +1,5 @@
+#Aashna Kunkolienker: ank8919, Akshita Upadhyay apu2005, Rameen Mahmood rkm352@nyu.edu
+
 #include <mbed.h>
 #include "math.h"
 #include "drivers/LCD_DISCO_F429ZI.h"
