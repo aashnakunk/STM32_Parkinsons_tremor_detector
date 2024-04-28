@@ -1,4 +1,4 @@
-#Aashna Kunkolienker: ank8919, Akshita Upadhyay apu2005, Rameen Mahmood rkm352@nyu.edu
+// Aashna Kunkolienker: ank8919, Akshita Upadhyay apu2005, Rameen Mahmood rkm352@nyu.edu
 
 #include <mbed.h>
 #include "math.h"
