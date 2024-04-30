@@ -1,0 +1,83 @@
+********************************************************************************
+Obsolete PIO Core v6.1.13 is used (previous was 6.1.15)
+Please remove multiple PIO Cores from a system:
+https://docs.platformio.org/en/latest/core/installation/troubleshooting.html
+********************************************************************************
+--- Terminal on /dev/cu.usbmodem1103 | 9600 8-N-1
+--- Available filters and text transformations: colorize, debug, default, direct, hexlify, log2file, nocontrol, printable, send_on_enter, time
+--- More details at https://bit.ly/pio-monitor-filters
+--- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H
+Angular Velocities - X: -0.099229, Y: -1.089736, Z: 0.136504
+Angular frequency - X: 0.015793, Y: 0.173437, Z: 0.021725
+Angular Velocities - X: -0.358372, Y: 0.126833, Z: -0.378450
+Angular frequency - X: 0.057037, Y: 0.020186, Z: 0.060232
+Angular Velocities - X: 1.597205, Y: -0.291786, Z: 0.152179
+Angular frequency - X: 0.254203, Y: 0.046439, Z: 0.024220
+Angular Velocities - X: 1.275880, Y: 0.107874, Z: 0.194127
+Angular frequency - X: 0.203063, Y: 0.017169, Z: 0.030896
+Angular Velocities - X: -1.090534, Y: 0.055861, Z: -0.280966
+Angular frequency - X: 0.173564, Y: 0.008891, Z: 0.044717
+Angular Velocities - X: -1.849417, Y: 0.133276, Z: -0.587347
+Angular frequency - X: 0.294344, Y: 0.021211, Z: 0.093479
+Angular Velocities - X: -1.077422, Y: 0.037497, Z: -0.256523
+Angular frequency - X: 0.171477, Y: 0.005968, Z: 0.040827
+Angular Velocities - X: 0.183263, Y: 0.259389, Z: 0.009337
+Angular frequency - X: 0.029167, Y: 0.041283, Z: 0.001486
+Angular Velocities - X: 2.660186, Y: 0.144677, Z: 0.116690
+Angular frequency - X: 0.423382, Y: 0.023026, Z: 0.018572
+Angular Velocities - X: 1.584496, Y: 0.113444, Z: 0.244363
+Angular frequency - X: 0.252180, Y: 0.018055, Z: 0.038892
+Angular Velocities - X: -1.129117, Y: -0.078193, Z: 0.024792
+Angular frequency - X: 0.179705, Y: 0.012445, Z: 0.003946
+Angular Velocities - X: -2.053442, Y: 0.128059, Z: -0.297873
+Angular frequency - X: 0.326815, Y: 0.020381, Z: 0.047408
+Angular Velocities - X: -1.490809, Y: -0.038107, Z: -0.343116
+Angular frequency - X: 0.237270, Y: 0.006065, Z: 0.054609
+Angular Velocities - X: -0.279207, Y: 0.016824, Z: 0.028421
+Angular frequency - X: 0.044437, Y: 0.002678, Z: 0.004523
+Angular Velocities - X: 2.315146, Y: 0.116282, Z: 0.183336
+Angular frequency - X: 0.368467, Y: 0.018507, Z: 0.029179
+Angular Velocities - X: 2.492865, Y: 0.038418, Z: 0.234536
+Angular frequency - X: 0.396752, Y: 0.006114, Z: 0.037328
+Angular Velocities - X: 2.689364, Y: -0.560447, Z: 0.676108
+Angular frequency - X: 0.428026, Y: 0.089198, Z: 0.107606
+Angular Velocities - X: -3.691682, Y: -0.032781, Z: -0.467217
+Angular frequency - X: 0.587550, Y: 0.005217, Z: 0.074360
+Angular Velocities - X: -2.333924, Y: -0.172419, Z: -0.275656
+Angular frequency - X: 0.371456, Y: 0.027441, Z: 0.043872
+Angular Velocities - X: -0.245104, Y: 0.242788, Z: -0.105450
+Angular frequency - X: 0.039009, Y: 0.038641, Z: 0.016783
+Angular Velocities - X: 1.319871, Y: 0.146776, Z: 0.226105
+Angular frequency - X: 0.210064, Y: 0.023360, Z: 0.035986
+Angular Velocities - X: 1.871130, Y: 0.182119, Z: 0.499770
+Angular frequency - X: 0.297800, Y: 0.028985, Z: 0.079541
+Angular Velocities - X: 0.952674, Y: 0.190567, Z: 0.124935
+Angular frequency - X: 0.151623, Y: 0.030330, Z: 0.019884
+Angular Velocities - X: -1.921475, Y: 0.040412, Z: -0.329223
+Angular frequency - X: 0.305812, Y: 0.006432, Z: 0.052397
+Angular Velocities - X: -2.559337, Y: -0.135677, Z: -0.170974
+Angular frequency - X: 0.407331, Y: 0.021594, Z: 0.027211
+Angular Velocities - X: -1.481914, Y: 0.209619, Z: -0.331697
+Angular frequency - X: 0.235854, Y: 0.033362, Z: 0.052791
+Angular Velocities - X: 0.182556, Y: 0.006990, Z: -0.050349
+Angular frequency - X: 0.029055, Y: 0.001112, Z: 0.008013
+Angular Velocities - X: 3.184764, Y: 0.301466, Z: 0.301806
+Angular frequency - X: 0.506871, Y: 0.047980, Z: 0.048034
+Angular Velocities - X: 1.967294, Y: -0.110979, Z: 0.403547
+Angular frequency - X: 0.313105, Y: 0.017663, Z: 0.064227
+Angular Velocities - X: -0.554285, Y: 0.016650, Z: -0.015808
+Angular frequency - X: 0.088217, Y: 0.002650, Z: 0.002516
+Angular Velocities - X: -2.437560, Y: -0.265349, Z: -0.185451
+Angular frequency - X: 0.387950, Y: 0.042232, Z: 0.029515
+Angular Velocities - X: -1.376987, Y: 0.044543, Z: -0.138873
+Angular frequency - X: 0.219154, Y: 0.007089, Z: 0.022102
+Angular Velocities - X: -0.671749, Y: 0.163216, Z: -0.098876
+Angular frequency - X: 0.106912, Y: 0.025977, Z: 0.015737
+Angular Velocities - X: 5.168662, Y: 0.321141, Z: 0.570072
+Angular frequency - X: 0.822618, Y: 0.051111, Z: 0.090730
+Angular Velocities - X: 3.549422, Y: 0.203553, Z: 0.586172
+Angular frequency - X: 0.564908, Y: 0.032396, Z: 0.093292
+Angular Velocities - X: -3.192193, Y: -0.161998, Z: -0.540464
+Angular frequency - X: 0.508053, Y: 0.025783, Z: 0.086018
+Angular Velocities - X: -4.305976, Y: -0.157067, Z: -0.496861
+Angular frequency - X: 0.685317, Y: 0.024998, Z: 0.079078
