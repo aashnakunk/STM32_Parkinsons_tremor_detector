@@ -183,21 +183,8 @@ int main() {
         //-----Conversion----
         uint16_t radius = 96; //needs to be measured based on the tester | unit = cms
         float Velocity[120];
-        float angular_velocity_x[120],angular_velocity_y[120],angular_velocity_z[120];
 
         float Distance = 0.0; //cms
-        char dis[12]; // Buffer to hold the string representation of dist
-        float total_velocity = 0.0;
-        float total_velocity_x = 0.0;
-        float total_velocity_y = 0.0;
-        float total_velocity_z = 0.0;
-
-        float avg_velocity = 0.0;
-        float avg_angular_velocity_x = 0.0;
-        float avg_angular_velocity_y = 0.0;
-        float avg_angular_velocity_z = 0.0;
-
-        char avg_vel[12],avg_vel_x[12],avg_vel_y[12],avg_vel_z[12]; // Buffer to hold the string representation of average velocity
         char time[12]; // Buffer to hold the string representation of time elapsed
        
         int16_t raw_gx, raw_gy, raw_gz;
@@ -229,7 +216,6 @@ int main() {
             gz = ((float)raw_gz) * SCALING_FACTOR;
 
             char buffer[50]; // Buffer to hold the formatted string
-            // Assuming gx is a float and you want to keep it as a float
             sprintf(buffer, "%f rad/s", gx); // Format gx as a float and append " rad/s"
 
             // Display on LCD
@@ -266,67 +252,25 @@ int main() {
             bool isTremorY = std_gy < TREMOR_STD_THRESHOLD && !minimalMovementY && std::abs(gy) < TREMOR_AMPLITUDE_THRESHOLD;
             bool isTremorZ = std_gz < TREMOR_STD_THRESHOLD && !minimalMovementZ && std::abs(gz) < TREMOR_AMPLITUDE_THRESHOLD;
 
-            // Display logic
-            LCD.DisplayStringAt(0, LINE(1), (uint8_t *)"Tremor Analysis", CENTER_MODE);
-            LCD.DisplayStringAt(0, LINE(3), (uint8_t *)(isTremorX ? "Tremor on X" : "Normal X"), CENTER_MODE);
-            LCD.DisplayStringAt(0, LINE(5), (uint8_t *)(isTremorY ? "Tremor on Y" : "Normal Y"), CENTER_MODE);
-            LCD.DisplayStringAt(0, LINE(7), (uint8_t *)(isTremorZ ? "Tremor on Z" : "Normal Z"), CENTER_MODE);
-
-            
             printf("GX: %f, StdDev: %f, isTremor: %s\n", gx, std_gx, isTremorX ? "YES" : "NO");
             printf("GY: %f, StdDev: %f, isTremor: %s\n", gy, std_gy, isTremorY ? "YES" : "NO");
             printf("GZ: %f, StdDev: %f, isTremor: %s\n", gz, std_gz, isTremorZ ? "YES" : "NO");
 
-
-            //Z axis is used as device will be attached to side
+            // Distance is measured in the Z direction: helps us quantify the amplitude of Parkinsons' tremors 
             Velocity[i] = conv(radius, gz_final[i]);
             Distance = dist(Velocity[i], Distance);
-            // printf("%d\n" , int(Distance));
-            angular_velocity_x[i] = gx_final[i];  // X-axis angular velocity
-            angular_velocity_y[i] = gy_final[i];  // Y-axis angular velocity
-            angular_velocity_z[i] = gz_final[i];  // Z-axis angular velocity
-             
-            total_velocity_x+= abs(angular_velocity_x[i]);
-            total_velocity_y+= abs(angular_velocity_y[i]);
-            total_velocity_z+= abs(angular_velocity_z[i]);
-
-            avg_angular_velocity_x = total_velocity_x/(i+1); //i+1 so that we dont divide by 0 or miss out on the first velocity values
-            avg_angular_velocity_y = total_velocity_y/(i+1); //i+1 so that we dont divide by 0 or miss out on the first velocity values
-            avg_angular_velocity_z = total_velocity_z/(i+1); //i+1 so that we dont divide by 0 or miss out on the first velocity values
-            total_velocity += abs(Velocity[i]);
-
-            avg_velocity = total_velocity/(i+1); //i+1 so that we dont divide by 0 or miss out on the first velocity values
-
 
             sprintf(totalDis, "%d", int(totalDistance)); // Convert float to string
             std::string finaldistance = std::string(totalDis) + " m"; // Concatenate with units
-            sprintf(dis, "%d", int(Distance)/100); // Convert float to string
-            std::string finalmeasurement = std::string(dis) + " m"; // Concatenate with units
-            sprintf(avg_vel, "%d", int(avg_angular_velocity_z)); // Convert float to string
-            std::string ang_velocity_x = std::string(avg_vel_z) + " rad/s"; // Concatenate with units
-            sprintf(avg_vel, "%d", int(avg_velocity)); // Convert float to string
-            std::string average_velocity = std::string(avg_vel) + " cm/s"; // Concatenate with units
-            sprintf(avg_vel, "%d", int(avg_angular_velocity_y)); // Convert float to string
-            std::string ang_velocity_y = std::string(avg_vel_y) + " rad/s"; // Concatenate with units
-            sprintf(avg_vel, "%d", int(avg_angular_velocity_z)); // Convert float to string
-            std::string ang_velocity_z = std::string(avg_vel_z) + " rad/s"; // Concatenate with units
             sprintf(time, "%d", countSecs); // Convert float to string
             std::string time_taken = std::string(time) + " seconds"; // Concatenate with units
 
             LCD.Clear(LCD_COLOR_ORANGE);
             LCD.SetBackColor(LCD_COLOR_ORANGE);
             LCD.SetTextColor(LCD_COLOR_BLACK);
-            // LCD.SetFont(&Font16);
-            // LCD.DisplayStringAt(0, LINE(2), (uint8_t *)"Parkinsons detector!",CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(5), (uint8_t *)"Distance Travelled:",CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(6), (uint8_t *)finaldistance.c_str(),CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(7), (uint8_t *)"Angular Velocity:",CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(8), (uint8_t *)ang_velocity_x.c_str(),CENTER_MODE);
-                
             LCD.DisplayStringAt(0, LINE(10), (uint8_t *)"Time Elapsed:",CENTER_MODE);
             LCD.DisplayStringAt(0, LINE(11), (uint8_t *)time_taken.c_str(),CENTER_MODE);
-        
-            LCD.DisplayStringAt(0, LINE(0), (uint8_t *)"Motion Detection:", CENTER_MODE);
+            LCD.DisplayStringAt(0, LINE(0), (uint8_t *)"Tremor Detection:", CENTER_MODE);
             LCD.DisplayStringAt(0, LINE(2), (uint8_t *)(isTremorX ? "Tremor on X" : "Normal on X"), CENTER_MODE);
             LCD.DisplayStringAt(0, LINE(4), (uint8_t *)(isTremorY ? "Tremor on Y" : "Normal on Y"), CENTER_MODE);
             LCD.DisplayStringAt(0, LINE(6), (uint8_t *)(isTremorZ ? "Tremor on Z" : "Normal on Z"), CENTER_MODE);
@@ -335,31 +279,15 @@ int main() {
 
             //sleep for 500ms = 0.5 second readings
             thread_sleep_for(500);
-
-
         }
         
         // detach timer to stop it from running in background and using resources
         timer.detach();
-        
-        
         // update screen once more after end of while loop as loop will exit after countSecs increments from 19 to 20 and this will not get updated again
         totalDistance += Distance;
 
-        avg_velocity = total_velocity/(i+1); //i+1 so that we dont divide by 0 or miss out on the first velocity values
-
         sprintf(totalDis, "%d", int(totalDistance)); // Convert float to string
         std::string finaldistance = std::string(totalDis) + " m"; // Concatenate with units
-        sprintf(dis, "%d", int(Distance)/100); // Convert float to string
-        std::string finalmeasurement = std::string(dis) + " m"; // Concatenate with units
-        sprintf(avg_vel, "%d", int(avg_velocity)); // Convert float to string
-        std::string average_velocity = std::string(avg_vel) + " cm/s"; // Concatenate with units
-        sprintf(avg_vel, "%f", int(avg_angular_velocity_x)); // Convert float to string
-        std::string ang_velocity_x = std::string(avg_vel_x) + " rad/s"; // Concatenate with units
-        sprintf(avg_vel, "%f", int(avg_angular_velocity_y)); // Convert float to string
-        std::string ang_velocity_y = std::string(avg_vel_y) + " rad/s"; // Concatenate with units
-        sprintf(avg_vel, "%f", int(avg_angular_velocity_z)); // Convert float to string
-        std::string ang_velocity_z = std::string(avg_vel_z) + " rad/s"; // Concatenate with units
         sprintf(time, "%d", countSecs); // Convert float to string
         std::string time_taken = std::string(time) + " seconds"; // Concatenate with units
 
@@ -367,22 +295,11 @@ int main() {
         LCD.SetBackColor(LCD_COLOR_ORANGE);
         LCD.SetTextColor(LCD_COLOR_BLACK);
         LCD.SetFont(&Font16);
-
-
         LCD.DisplayStringAt(0, LINE(5), (uint8_t *)"Total Distance:",CENTER_MODE);
         LCD.DisplayStringAt(0, LINE(6), (uint8_t *)finaldistance.c_str(),CENTER_MODE);
-
         LCD.DisplayStringAt(0, LINE(12), (uint8_t *)"Time Elapsed:",CENTER_MODE);
         LCD.DisplayStringAt(0, LINE(13), (uint8_t *)time_taken.c_str(),CENTER_MODE);
-        // LCD.DisplayStringAt(0, LINE(10), (uint8_t *)"Angular Velocity:",CENTER_MODE);
-        // LCD.DisplayStringAt(0, LINE(11), (uint8_t *)ang_velocity_x.c_str(),CENTER_MODE);
-
-
         LCD.DisplayStringAt(0, LINE(1), (uint8_t *)"PARKINSONS DETECTOR",CENTER_MODE);
-        // LCD.DisplayStringAt(0, LINE(2), (uint8_t *)"Project by:",CENTER_MODE);
-        // LCD.DisplayStringAt(0, LINE(3), (uint8_t *)"A,A,R",CENTER_MODE);
-
         led.write(0);
-    
     }
 }
