@@ -31,7 +31,7 @@
 int window_index = 0;  // Index to manage the rolling window
 float rms_gx = 0.0f, rms_gy = 0.0f, rms_gz = 0.0f;
 
-float calculate_rms(const std::vector<float>& data) {
+float calculate_rms(const std::vector<float>& data) { // using RMS as a measure of tremor intensity
     float squared_sum = std::inner_product(data.begin(), data.end(), data.begin(), 0.0f);
     return std::sqrt(squared_sum / data.size());
 }
@@ -40,7 +40,7 @@ const char* getTremorStrength(float rms_value, bool isTremor) {
     if (!isTremor) {
         return "N/A"; // No tremor, return "N/A" for strength
     }
-    return (rms_value < 0.5) ? "weak" : "strong"; // Determine strength based on RMS value
+    return (rms_value < 0.5) ? "Weak" : "Strong"; // Determine strength based on RMS value
 }
 
 
@@ -67,11 +67,11 @@ float update_rolling_std(std::vector<float>& window, float new_sample) {
     float variance = (sum_sq / count) - (mean * mean);
     return std::sqrt(variance);
 }
+
 // Vectors to hold rolling data for gyro measurements
 std::vector<float> rolling_gx(WINDOW_SIZE, 0);
 std::vector<float> rolling_gy(WINDOW_SIZE, 0);
 std::vector<float> rolling_gz(WINDOW_SIZE, 0);
-
 
 // Updates rolling window and calculate mean / rms (optional)
 float update_rolling_window(std::vector<float>& window, float new_sample) {
@@ -89,7 +89,6 @@ float update_rolling_window(std::vector<float>& window, float new_sample) {
 
     return mean; 
 }
-
 
 EventFlags flags; // EventFlags object declaration
 // DigitalIn button(PA_0);
@@ -272,14 +271,9 @@ int main() {
             bool isTremorY = std_gy < TREMOR_STD_THRESHOLD && !minimalMovementY && std::abs(gy) < TREMOR_AMPLITUDE_THRESHOLD;
             bool isTremorZ = std_gz < TREMOR_STD_THRESHOLD && !minimalMovementZ && std::abs(gz) < TREMOR_AMPLITUDE_THRESHOLD;
 
-            // printf("RMS GX: %.2f, isTremor: %s\n", rms_gx, isTremorX ? "YES" : "NO");
-            // printf("RMS GY: %.2f, isTremor: %s\n", rms_gy, isTremorY ? "YES" : "NO");
-            // printf("RMS GZ: %f, isTremor: %s\n", rms_gz, isTremorZ ? "YES" : "NO");
             printf("RMS GX: %.2f, Tremor: %s, Strength: %s\n", rms_gx, isTremorX ? "YES" : "NO", getTremorStrength(rms_gx, isTremorX));
             printf("RMS GY: %.2f, Tremor: %s, Strength: %s\n", rms_gy, isTremorY ? "YES" : "NO", getTremorStrength(rms_gy, isTremorY));
             printf("RMS GZ: %.2f, Tremor: %s, Strength: %s\n", rms_gz, isTremorZ ? "YES" : "NO", getTremorStrength(rms_gz, isTremorZ));
-
-
 
             // Distance is measured in the Z direction: helps us quantify the amplitude of Parkinsons' tremors 
             Velocity[i] = conv(radius, gz_final[i]);
@@ -294,13 +288,7 @@ int main() {
             LCD.Clear(LCD_COLOR_ORANGE);
             LCD.SetBackColor(LCD_COLOR_ORANGE);
             LCD.SetTextColor(LCD_COLOR_BLACK);
-            
-            // LCD.DisplayStringAt(0, LINE(10), (uint8_t *)"Time Elapsed:",CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(11), (uint8_t *)time_taken.c_str(),CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(0), (uint8_t *)"Tremor Detection:", CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(2), (uint8_t *)(isTremorX ? "Tremor on X" : "Normal on X"), CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(4), (uint8_t *)(isTremorY ? "Tremor on Y" : "Normal on Y"), CENTER_MODE);
-            // LCD.DisplayStringAt(0, LINE(6), (uint8_t *)(isTremorZ ? "Tremor on Z" : "Normal on Z"), CENTER_MODE);
+
             char lcd_display[100]; // Ensure buffer size is adequate
             if (isTremorX) {
                 sprintf(lcd_display, "Tremor on X - %s", getTremorStrength(rms_gx, isTremorX));
@@ -322,15 +310,6 @@ int main() {
                 sprintf(lcd_display, "Normal on Z");
             }
             LCD.DisplayStringAt(0, LINE(6), (uint8_t *)lcd_display, CENTER_MODE);
-
-            // sprintf(lcd_display, isTremorX ? "Tremor" : "Normal", getTremorStrength(rms_gx, isTremorX));
-            // LCD.DisplayStringAt(0, LINE(2), (uint8_t *)lcd_display, CENTER_MODE);
-
-            // sprintf(lcd_display, isTremorY ? "Tremor" : "Normal", getTremorStrength(rms_gy, isTremorY));
-            // LCD.DisplayStringAt(0, LINE(4), (uint8_t *)lcd_display, CENTER_MODE);
-
-            // sprintf(lcd_display, isTremorZ ? "Tremor" : "Normal", getTremorStrength(rms_gz, isTremorZ));
-            // LCD.DisplayStringAt(0, LINE(6), (uint8_t *)lcd_display, CENTER_MODE);
 
             i++;
 
