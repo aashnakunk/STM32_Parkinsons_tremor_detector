@@ -14,7 +14,6 @@ This project aims to develop a real-time monitoring system that utilizes a gyros
 - **LCD Display (LCD_DISCO_F429ZI)**
 - **SPI Gyroscope**
 - **Push Button**
-- **LED Indicator**
 
 ## Software and Libraries
 - **Mbed OS**: The platform for firmware development.
